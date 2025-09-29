@@ -1,0 +1,139 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #181318;
+}
+
+body {
+    display: flex;
+    justify-content: center; /* horizontal center */
+    align-items: center;     /* vertical center */
+    position: relative;      /* for absolute background */
+    background: transparent;
+}
+
+
+
+.main_title {
+    position: absolute;
+    top: 12%; /* or whatever placement you want */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    color: #FAEADD
+}
+
+.menu {
+    position: absolute;
+    z-index: 20;
+    top: 1.5vh;   /* distance from top scales with viewport height */
+    left: 2vw;  /* distance from left scales with viewport width */
+    display: flex;
+    gap: 2vw;   /* spacing between buttons scales with window width */
+}
+
+.menu_button {
+    padding: 0.8vh 1.5vw;                /* scales with screen size, 1st one is top/bottom, 2nd one is left/right */
+    font-size: clamp(0.8rem, 1.8vw, 2rem); /* min, preferred, max */
+    font-family: 'Outfit', sans-serif;
+    
+    background: #2D2431;
+    border-radius: 4vh;                /* rounded corners scale */
+    color: #F1BCCD;
+    cursor: pointer;
+    
+    display: inline-block;
+    transition: background 0.3s ease, color 0.3s ease;
+    z-index: 3;
+    box-shadow: 0 0.5vw #201922;
+}
+
+.menu_button:hover {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.5vw #e16d91;
+}
+
+.menu_button:active {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.2vw #e16d91;
+    transform: translateY(0.3vw);
+}
+
+.pick_file_link {
+    position: absolute;
+    z-index: 20;
+    top: 10vh;   /* distance from top scales with viewport height */
+    left: 4vw;  /* distance from left scales with viewport width */
+    display: flex;
+    gap: 2vw;   /* spacing between buttons scales with window width */
+    color:#F1BCCD;
+    font-size: clamp(0.6rem, 1.35vw, 1.5rem); /* min, preferred, max */
+    font-family: 'Outfit', sans-serif;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.pick_file_link:hover {
+    color:#e15984
+}
+
+.pick_file_link:active {
+    color: #FAEADD;
+}
+
+.plot_detector {
+    position: absolute;
+    top: 20vh;
+    left: 9vw;
+    width: 30%;
+    height: 30%;
+
+    background: white url("../Opening_file_window/Detector_array.png") no-repeat center center;
+    background-size: contain;   /* keep aspect ratio, fit inside */
+    background-position: center;   /* center vertically */
+    z-index: 21;                   
+    
+    box-shadow: 0vh 0vw 0.5vh 0.5vw #fff;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.plot_detector:hover {
+    opacity: 0.5;
+}
+
+.plot_detector:active {
+    opacity: 0.3;
+}
+
+.plot_rawdata {
+    position: absolute;
+    top: 20vh;
+    right: 9vw;
+    width: 30%;
+    height: 30%;
+
+    background: white url("../Opening_file_window/Int_fluctuations.png") no-repeat center center;
+    background-size: contain;   /* keep aspect ratio, fit inside */
+    background-position: center;   /* center vertically */
+    z-index: 21;                   /* stay behind dropbox/text if needed */
+    
+    box-shadow: 0vh 0vw 0.5vh 0.5vw #fff;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.plot_rawdata:hover {
+    opacity: 0.5;
+}
+
+.plot_rawdata:active {
+    opacity: 0.3;
+}

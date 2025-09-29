@@ -1,0 +1,219 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #181318;
+}
+
+body {
+    display: flex;
+    justify-content: center; /* horizontal center */
+    align-items: center;     /* vertical center */
+    position: relative;      /* for absolute background */
+    background: transparent;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: url("Background_image.png") no-repeat center center;
+    background-size: 100% auto;     /* full width, keep aspect ratio */
+    background-position: center;   /* center vertically */
+    z-index: -1;                   /* stay behind dropbox/text if needed */
+    pointer-events: none;
+}
+
+.main_title {
+    position: absolute;
+    top: 12%; /* or whatever placement you want */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    color: #FAEADD
+}
+
+.menu {
+    position: absolute;
+    z-index: 20;
+    top: 1.5vh;   /* distance from top scales with viewport height */
+    left: 2vw;  /* distance from left scales with viewport width */
+    display: flex;
+    gap: 2vw;   /* spacing between buttons scales with window width */
+}
+
+.menu_button {
+    padding: 0.8vh 1.5vw;                /* scales with screen size, 1st one is top/bottom, 2nd one is left/right */
+    font-size: clamp(0.8rem, 1.8vw, 2rem); /* min, preferred, max */
+    font-family: 'Outfit', sans-serif;
+    
+    background: #2D2431;
+    border-radius: 4vh;                /* rounded corners scale */
+    color: #F1BCCD;
+    cursor: pointer;
+    
+    display: inline-block;
+    transition: background 0.3s ease, color 0.3s ease;
+    z-index: 3;
+    box-shadow: 0 0.5vw #201922;
+}
+
+.analysis_link {
+    position: absolute;
+    z-index: 20;
+    top: 10vh;   /* distance from top scales with viewport height */
+    right: 4vw;  /* distance from left scales with viewport width */
+    display: flex;
+    gap: 2vw;   /* spacing between buttons scales with window width */
+    color:#F1BCCD;
+    font-size: clamp(0.6rem, 1.35vw, 1.5rem); /* min, preferred, max */
+    font-family: 'Outfit', sans-serif;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.analysis_link:hover {
+    color:#e15984
+}
+
+.analysis_link:active {
+    color: #FAEADD;
+}
+
+.menu_button:hover {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.5vw #e16d91;
+}
+
+.menu_button:active {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.2vw #e16d91;
+    transform: translateY(0.3vw);
+}
+
+.dropbox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* because the center of the dropbox is centered around the bottom right corner of the window */
+    
+    width: 65vw;          /* responsive width */
+    height: 50vh;         /* responsive height */
+    
+    background: rgba(219, 162, 255, 0.25);
+    border: 9px solid rgba(255, 217, 185, 0.7);
+    
+    border-radius: 50px;
+    z-index: 1;
+
+    display: flex;              /* enable flexbox */
+    flex-direction: column;     /* stack children vertically */
+       /* vertical centering */
+    align-items: center;        /* horizontal centering */
+    
+     
+    z-index: 0;
+}
+
+#dropbox_text{
+    position: relative;       /* make it take full width */
+    top: 9vh;       /* vertical centering */
+    font-size: 2.5rem;           /* optional styling */
+    color: #dcc7e3;               /* optional text color */
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+}
+
+#name_of_file{
+    position: relative;       /* make it take full width */
+    top: 16vh;       /* vertical centering */
+    font-size: 1.7rem;           /* optional styling */
+    color: #FAEADD;               /* optional text color */
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    background: #2D2431;
+    border-radius: 4vh;
+    padding: 1.5vh 1.5vw;
+    max-width: 70%;          /* prevent overflowing the dropbox */
+    word-wrap: break-word;   /* break long words onto next line */
+    overflow-wrap: break-word;
+    white-space: normal;
+    text-align: center; 
+}
+
+#confirm_button{
+    position: fixed;       /* fixed relative to viewport */
+    bottom: 10vh;           /* distance from bottom of screen */
+    left: 50%;             /* center horizontally */
+    transform: translateX(-50%); /* center */
+    z-index: 10;           /* make sure it’s on top of dropbox */
+
+    padding: 0.2vh 1.5vw; 
+    font-size: clamp(0.8rem, 1.8vw, 2rem); /* min, preferred, max */
+    font-family: 'Outfit', sans-serif;
+    
+    background: #F1BCCD;
+    box-shadow: 0 0.5vw #f092b0;
+    border-radius: 4vh;                /* rounded corners scale */
+    color: #e15984;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+#confirm_button:hover{
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.5vw #e16d91;
+}
+
+#confirm_button:active {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.2vw #e16d91;
+    transform: translateX(-50%) translateY(0.3vw);
+}
+
+#select_file_button{
+    position: fixed;       /* fixed relative to viewport */
+    bottom: 14vh;           /* distance from bottom of screen */
+    left: 50%;             /* center horizontally */
+    transform: translateX(-50%); /* center */
+    z-index: 10;           /* make sure it’s on top of dropbox */
+
+    padding: 1.5vh 2.5vw; 
+    font-size: clamp(0.8rem, 1.8vw, 2rem); /* min, preferred, max */
+    font-family: 'Outfit', sans-serif;
+    
+    background: #2D2431;
+    border-radius: 4vh;                /* rounded corners scale */
+    color: #F1BCCD;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    box-shadow: 0 0.5vw #201922;
+}
+
+#select_file_button:hover {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.5vw #e16d91;
+}
+
+#select_file_button:active {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.2vw #e16d91;
+    transform: translateX(-50%) translateY(0.3vw);
+}
+
+
+
+

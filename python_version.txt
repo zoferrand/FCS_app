@@ -1,0 +1,6 @@
+pip install numpy==2.0.1
+pip install matplotlib==3.10.3
+pip install czifile==2019.7.2.1
+pip install multipletau==0.4.1
+pip install scipy==1.15.3
+pip install pywebview[qt]==6.0

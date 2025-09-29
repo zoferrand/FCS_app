@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FCS app</title>
+  <link rel="stylesheet" href="FCS_app.css">
+</head>
+<body>
+
+    <div class="background">
+        <div class="main_title">FCS analysis app</div>
+    </div>
+
+    <div class="menu">
+      <span class="menu_button">File</span>
+      <span class="menu_button">Edit</span>
+    </div>
+
+    <div class="analysis_link" onclick="go_to_analysis_file()">File analysis</div>
+
+    <div class="dropbox" id="dropbox">
+      <span id="dropbox_text">FCS measurement to analyse :</span>
+      <span id="name_of_file" hidden>blabla</span>
+      <div id="confirm_button" hidden onclick="confirmFile()">Confirm</div>
+    </div>
+
+    <div id="select_file_button" onclick="selectFile()">Select .czi file</div>
+
+    
+  <script src="FCS_app.js"></script>
+</body>
+</html>
