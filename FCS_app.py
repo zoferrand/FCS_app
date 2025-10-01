@@ -1,5 +1,6 @@
 import webview
 from webview import FileDialog
+import shutil
 
 import numpy as np 
 import math as m
@@ -17,6 +18,9 @@ import matplotlib.colors as mcolors
 from scipy.interpolate import interp1d
 
 
+def on_main_closed():
+    print("Main window closed. Exiting app...")
+    os._exit(0)  # force exit (optional, ensures Python quits)
 
 def plot_detector_array(folder,name,intensities):
 
@@ -42,11 +46,9 @@ def plot_detector_array(folder,name,intensities):
 class Api:
     
     def __init__(self):
-        self.main_window = None
-        # self.analysis_window = None
         
-        # self.analysis_wind_opened = False 
-    
+        self.main_window = None
+        
     def open_file_dialog(self):
         
         window = webview.windows[0]
@@ -59,6 +61,9 @@ class Api:
         return None
 
     def open_file(self, path):
+        
+        self.path = path
+        self.exp_name = self.path.split('/')[-1].split('.')[0]
         
         os.makedirs("Opening_file_window", exist_ok=True)
         
@@ -157,23 +162,12 @@ class Api:
 
     def open_analysis_window(self):
         
-        # if window_to_close=="main_window":
-        #     window_to_close=main_window
         if self.main_window==None:
             self.main_window=main_window
         
         os.makedirs("Analysis_window", exist_ok=True)
         
         self.main_window.load_url("Analysis_window/FCS_app_analysis.html")
-        
-        # window_to_close.destroy()
-        
-        
-        # self.analysis_window = webview.create_window("FCS app", "Analysis_window/FCS_app_analysis.html", width=window_to_close.width, height=window_to_close.height, resizable=True, js_api=self)
-        
-        # self.analysis_wind_opened = True
-        
-        
         
     def open_main_window(self):
         
@@ -182,17 +176,34 @@ class Api:
             
         self.main_window.load_url("FCS_app.html")
         
-        # if window_to_close=="analysis_window":
-        #     window_to_close=self.analysis_window 
-            
-        # window_to_close.hide()
-            
-        # self.main_window = webview.create_window("FCS app", "FCS_app.html", width=window_to_close.width, height=window_to_close.height, resizable=True, js_api=self)
+    def open_zoom_plot_detector(self):
         
+        os.makedirs("Analysis_window/Zoom_plot_detector", exist_ok=True)
         
+        self.opening_plot_detector_window = webview.create_window(" ", "Analysis_window/Zoom_plot_detector/zoom_plot_detector.html", width=1200, height=1200, js_api=self)
             
+    def open_zoom_plot_rawdata(self):
         
-
-
+        os.makedirs("Analysis_window/Zoom_plot_rawdata", exist_ok=True)
+        
+        self.opening_plot_rawdata_window = webview.create_window(" ", "Analysis_window/Zoom_plot_rawdata/zoom_plot_rawdata.html", width=1200, height=1200, js_api=self)
+            
+    def save_file(self,path,name):
+        
+        file_name = name.split('.')[0]
+        file_extension = name.split('.')[1]
+        
+        file_types = ('All files (*.*)',)
+        result = self.main_window.create_file_dialog(FileDialog.SAVE, file_types=file_types, save_filename='%s_%s.%s'%(file_name,self.exp_name,file_extension))
+        if result:
+            # result is a list with one element -> the chosen path
+            destination = result[0]
+            shutil.copy(path, destination)  # copy file to user-chosen location
+        
+            result.destroy()
+        return destination
+    
+        
 main_window = webview.create_window("FCS app", "FCS_app.html", width=1500, height=1200, resizable=True, js_api=Api())
+main_window.events.closed += on_main_closed
 webview.start(gui="qt", debug=False)
