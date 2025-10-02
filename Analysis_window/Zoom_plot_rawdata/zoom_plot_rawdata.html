@@ -17,11 +17,19 @@
         
     </div>
 
-    <div class="text_boxes">
-        <label for="textbox_first_tp">Start point (s):</label>
-        <input type="text" class="first_tp" id="textbox_first_tp">
-        <label for="textbox_last_tp">End point (s):</label>
-        <input type="text" class="last_tp" id="textbox_last_tp">
+    <div class="div_text_boxes">
+        <div class="text_boxes_first">
+            <label for="textbox_first_tp">Starting time (s):</label>
+            <input type="text" class="first_tp" id="textbox_first_tp">
+        </div>
+        <div class="text_boxes_last">
+            <label for="textbox_last_tp">Ending time (s):</label>
+            <input type="text" class="last_tp" id="textbox_last_tp">
+        </div>
+    </div>
+
+    <div class="div_crop">
+        <span class="crop_button"><b>Crop !</b></span>
     </div>
 
     <script src="zoom_plot_rawdata.js"></script>
