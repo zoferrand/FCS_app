@@ -11,20 +11,25 @@
       <span class="save_button" onclick="save_plot_rawdata()">Save</span>
     </div>
 
+    <div class="title_rawdata"><b>Rawdata</b></div>
+
     <div class="zoom_plot"></div>
 
-    <div class="label_text_boxes">
-        
+    <div class="info_crop">
+        <div class="text_total_tp"><strong>Total time points:</strong> 5000000</div>
+        <div>It is recommanded to <strong>crop</strong> the beginning of the signal in order to reduce the effect of photo-bleaching.</div>
     </div>
+
+    <div class="label_text_boxes"></div>
 
     <div class="div_text_boxes">
         <div class="text_boxes_first">
-            <label for="textbox_first_tp">Starting time (s):</label>
-            <input type="text" class="first_tp" id="textbox_first_tp">
+            <label for="textbox_first_tp">Starting point:</label>
+            <input type="text" class="first_tp" id="textbox_first_tp" placeholder="0" onfocus="this.placeholder=''" >
         </div>
         <div class="text_boxes_last">
-            <label for="textbox_last_tp">Ending time (s):</label>
-            <input type="text" class="last_tp" id="textbox_last_tp">
+            <label for="textbox_last_tp">Ending point:</label>
+            <input type="text" class="last_tp" id="textbox_last_tp" placeholder="5000000" onfocus="this.placeholder=''" >
         </div>
     </div>
 
