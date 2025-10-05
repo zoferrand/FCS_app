@@ -1,6 +1,7 @@
 import webview
 from webview import FileDialog
 import shutil
+import io, base64
 
 import numpy as np 
 import math as m
@@ -82,7 +83,7 @@ class Api:
 
         self.size_T = self.size_X*self.size_T
         
-        time_points = np.array([(i*self.pixel_time) for i in range(self.size_T)])
+        self.time_points = np.array([(i*self.pixel_time) for i in range(self.size_T)])
 
         root = ET.Element("root")
         ET.SubElement(root,"size_X").text = "%s"%(self.size_X)
@@ -106,9 +107,11 @@ class Api:
         tot_int_pix_w = np.nanmean(self.img_whole,axis=0)
         self.all_int = [tot_int_pix_c,tot_int_pix_f,tot_int_pix_s,tot_int_pix_w]
         
-        plt.plot(time_points[::1000],self.img_whole[::1000],color='#e15984')
-        plt.xlabel("Time (s)")
-        plt.ylabel("Intensity")
+        fig, ax = plt.subplots(figsize=(9, 6))
+        ax.plot(self.time_points[::1000], self.img_whole[::1000], color='#e15984')
+        ax.set_xlabel("Time (s)",fontsize=14)
+        ax.set_ylabel("Intensity",fontsize=14)
+        ax.tick_params(axis='both', which='major', labelsize=12)
         plt.savefig("Opening_file_window/Int_fluctuations.png",dpi=600)
         plt.close()
         plt.clf()
@@ -202,6 +205,64 @@ class Api:
         
             result.destroy()
         return destination
+    
+    def update_crop_values(self,first_crop,last_crop):
+        
+        first_crop = int(first_crop)
+        last_crop = int(last_crop)
+        
+        fig, ax = plt.subplots(figsize=(9, 6))
+     
+        # Your plot
+        ax.plot(self.time_points[::1000], self.img_whole[::1000], color='#e15984')
+        ax.axvline(x=first_crop*self.pixel_time, color="#9a113c")
+        ax.axvline(x=last_crop*self.pixel_time, color='#9a113c')
+        ax.set_xlabel("Time (s)",fontsize=14)
+        ax.set_ylabel("Intensity",fontsize=14)
+        ax.tick_params(axis='both', which='major', labelsize=12)
+
+        # Save to buffer instead of file
+        buf = io.BytesIO()
+        fig.savefig(buf, format='png', dpi=600)
+        buf.seek(0)
+
+        # Convert to base64
+        img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+        buf.close()
+        plt.close(fig)
+        
+        # Return the string to JavaScript
+        return img_base64
+    
+    def plot_cropped_data(self,first_crop,last_crop):
+        
+        first_crop = int(first_crop)
+        last_crop = int(last_crop)
+        
+        self.time_points = self.time_points[first_crop:last_crop]
+        self.img_whole = self.img_whole[first_crop:last_crop]
+        
+        fig, ax = plt.subplots(figsize=(9, 6))
+     
+        # Your plot
+        ax.plot(self.time_points[::1000], self.img_whole[::1000], color='#e15984')
+        ax.set_xlabel("Time (s)",fontsize=14)
+        ax.set_ylabel("Intensity",fontsize=14)
+        ax.tick_params(axis='both', which='major', labelsize=12)
+        fig.savefig("Opening_file_window/Int_fluctuations.png", dpi=600)
+
+        # Save to buffer instead of file
+        buf = io.BytesIO()
+        fig.savefig(buf, format='png', dpi=600)
+        buf.seek(0)
+
+        # Convert to base64
+        img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+        buf.close()
+        plt.close(fig)
+        
+        # Return the string to JavaScript
+        return img_base64
     
         
 main_window = webview.create_window("FCS app", "FCS_app.html", width=1500, height=1200, resizable=True, js_api=Api())

@@ -15,22 +15,23 @@ body {
 }
 
 .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    background: url("Background_image.png") no-repeat center center;
-    background-size: 100% auto;     /* full width, keep aspect ratio */
-    background-position: center;   /* center vertically */
-    z-index: -1;                   /* stay behind dropbox/text if needed */
-    pointer-events: none;
+    position: absolute;
+    display: flex;
+    justify-content: center; /* center horizontally */
+    
+    
+    top: 12.5%;
+    height: 83%;
+    width: 95%;
+    background: #322335;
+    z-index: -1;
+    box-shadow: 0vh 0vw 0.5vh 0.5vw #322335;
+    gap: 5vw;
 }
 
 .main_title {
     position: absolute;
-    top: 12%; /* or whatever placement you want */
+    top: 2%; /* or whatever placement you want */
     left: 50%;
     transform: translateX(-50%);
     font-size: 4rem;
@@ -41,34 +42,53 @@ body {
 
 .menu {
     position: absolute;
+    align-items: center;     /* center vertically */
     z-index: 20;
-    top: 1.5vh;   /* distance from top scales with viewport height */
-    left: 2vw;  /* distance from left scales with viewport width */
+    padding-bottom: 10px;
+    top: 10px;   /* distance from top scales with viewport height */
+    left: 25px; /* distance from left scales with viewport width */
+    right: 25px; /* distance from right scales with viewport width */
+    height: 70px;
     display: flex;
-    gap: 2vw;   /* spacing between buttons scales with window width */
+    box-shadow: 0 5px #e16d91;
+    gap: 30px;
 }
 
 .menu_button {
-    padding: 0.8vh 1.5vw;                /* scales with screen size, 1st one is top/bottom, 2nd one is left/right */
-    font-size: clamp(0.8rem, 1.8vw, 2rem); /* min, preferred, max */
+    display: flex;                  /* flex container */
+    justify-content: center;        /* center horizontally */
+    align-items: center;            /* center vertically */
+    padding: 15px 18px;                /* scales with screen size, 1st one is top/bottom, 2nd one is left/right */
+    font-size: 30px; /* min, preferred, max */
     font-family: 'Outfit', sans-serif;
-    
     background: #2D2431;
-    border-radius: 4vh;                /* rounded corners scale */
+    border-radius: 30px;                /* rounded corners scale */
     color: #F1BCCD;
     cursor: pointer;
-    
-    display: inline-block;
+    height: 30%;
     transition: background 0.3s ease, color 0.3s ease;
     z-index: 3;
-    box-shadow: 0 0.5vw #201922;
+    box-shadow: 0 8px #201922;
+}
+
+.menu_button:hover {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 8px #e16d91;
+}
+
+.menu_button:active {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 4px #e16d91;
+    transform: translateY(6px);
 }
 
 .analysis_link {
     position: absolute;
     z-index: 20;
-    top: 10vh;   /* distance from top scales with viewport height */
-    right: 4vw;  /* distance from left scales with viewport width */
+    top: 15vh;   /* distance from top scales with viewport height */
+    right: 6vw;  /* distance from left scales with viewport width */
     display: flex;
     gap: 2vw;   /* spacing between buttons scales with window width */
     color:#F1BCCD;
@@ -87,22 +107,11 @@ body {
     color: #FAEADD;
 }
 
-.menu_button:hover {
-    background-color: #E39CB3;  /* lighter hover background */
-    color: #FAEADD;                 /* white text on hover */
-    box-shadow: 0 0.5vw #e16d91;
-}
 
-.menu_button:active {
-    background-color: #E39CB3;  /* lighter hover background */
-    color: #FAEADD;                 /* white text on hover */
-    box-shadow: 0 0.2vw #e16d91;
-    transform: translateY(0.3vw);
-}
 
 .dropbox {
     position: fixed;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%); /* because the center of the dropbox is centered around the bottom right corner of the window */
     
@@ -184,7 +193,7 @@ body {
 
 #select_file_button{
     position: fixed;       /* fixed relative to viewport */
-    bottom: 14vh;           /* distance from bottom of screen */
+    bottom: 9vh;           /* distance from bottom of screen */
     left: 50%;             /* center horizontally */
     transform: translateX(-50%); /* center */
     z-index: 10;           /* make sure it’s on top of dropbox */

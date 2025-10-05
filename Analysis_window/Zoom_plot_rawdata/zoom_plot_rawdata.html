@@ -11,30 +11,42 @@
       <span class="save_button" onclick="save_plot_rawdata()">Save</span>
     </div>
 
-    <div class="title_rawdata"><b>Rawdata</b></div>
+    <div class="title_rawdata"><b>Raw data</b></div>
 
     <div class="zoom_plot"></div>
 
     <div class="info_crop">
         <div class="text_total_tp"><strong>Total time points:</strong> 5000000</div>
-        <div>It is recommanded to <strong>crop</strong> the beginning of the signal in order to reduce the effect of photo-bleaching.</div>
+        <div>It is recommanded to <strong>crop</strong> the beginning of the signal in order to reduce the effect of photo-bleaching on the correlation curve.</div>
     </div>
 
     <div class="label_text_boxes"></div>
 
     <div class="div_text_boxes">
-        <div class="text_boxes_first">
-            <label for="textbox_first_tp">Starting point:</label>
-            <input type="text" class="first_tp" id="textbox_first_tp" placeholder="0" onfocus="this.placeholder=''" >
+        <div class="group_first">
+            <div class="text_boxes_first">
+                <label for="textbox_first_tp" class="label_first"><strong>Starting point:</strong></label>
+                <input type="number" class="first_tp" id="textbox_first_tp" value="0" min="0" max="5000000" step="1000">
+            </div>
+            <div class="div_confirm_button_first">
+                <label for="div_confirm_button_first" class="label_button_first"> . </label>
+                <span class="confirm_button_first" id="confirm_button_first" onclick="updatePlotFirstTp()">&#x2713;</span>
+            </div>
         </div>
-        <div class="text_boxes_last">
-            <label for="textbox_last_tp">Ending point:</label>
-            <input type="text" class="last_tp" id="textbox_last_tp" placeholder="5000000" onfocus="this.placeholder=''" >
+        <div class="group_last">
+            <div class="text_boxes_last">
+                <label for="textbox_last_tp" class="label_last"><strong>Ending point:</strong></label>
+                <input type="number" class="last_tp" id="textbox_last_tp" value="5000000" min="0" max="5000000" step="1000">
+            </div>
+            <div class="div_confirm_button_last">
+                <label for="div_confirm_button_last" class="label_button_last"> . </label>
+                <span class="confirm_button_last" id="confirm_button_last" onclick="updatePlotLastTp()">&#x2713;</span>
+            </div>
         </div>
     </div>
 
     <div class="div_crop">
-        <span class="crop_button"><b>Crop !</b></span>
+        <span class="crop_button" id="crop_button" onclick="plotCroppedData()"><b>Crop !</b></span>
     </div>
 
     <script src="zoom_plot_rawdata.js"></script>

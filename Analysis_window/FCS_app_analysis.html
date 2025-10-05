@@ -12,11 +12,24 @@
       <span class="menu_button">Edit</span>
     </div>
 
+    
+
     <div class="pick_file_link" onclick="go_to_pick_file()">Pick file</div>
 
-    <div class="plot_detector" onclick="zoom_plot_detector()"></div>
-    <div class="plot_rawdata" onclick="zoom_plot_rawdata()"></div>
-    
+    <div class="background">
+      <div class="detector">
+        <label for="plot_detector">Choose detectors to analyse !</label>
+        <div class="plot_detector" onclick="zoom_plot_detector()"></div>
+      </div>
+      <div class="rawdata">
+        <label for="plot_rawdata">Crop raw data !</label>
+        <div class="plot_rawdata" onclick="zoom_plot_rawdata()"></div>
+      </div>
+    </div>
+
+    <div class="div_correlate_button">
+        <span class="correlate_button">Correlate !</span>
+      </div>
     
     <script src="FCS_app_analysis.js"></script>
 </body>
