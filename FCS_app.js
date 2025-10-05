@@ -16,7 +16,7 @@ window.addEventListener('pywebviewready', () => {
                 fileNameText.hidden = false
                 fileNameText.innerHTML = `${fileName}`;
                 confirmButton.hidden = false;
-                dropArea.style.border = "25px double rgba(255, 217, 185, 0.7)";
+                dropArea.style.border = "25px double #F1BCCD";
             }
             else {
                 selectedFilePath = null
