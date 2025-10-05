@@ -209,6 +209,10 @@ body {
     height: 1vh;           
 }
 
+.first_tp::selection, .last_tp::selection {
+    background: #f0c7d4;
+}
+
 .first_tp:hover , .last_tp:hover {
     border-color: #eb98b2;
 }
