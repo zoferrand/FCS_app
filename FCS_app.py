@@ -84,6 +84,7 @@ class Api:
         self.size_T = self.size_X*self.size_T
         
         self.time_points = np.array([(i*self.pixel_time) for i in range(self.size_T)])
+        self.old_tp = self.time_points.copy()
 
         root = ET.Element("root")
         ET.SubElement(root,"size_X").text = "%s"%(self.size_X)
@@ -100,6 +101,7 @@ class Api:
         self.img_first_ring = np.nanmean(img[:7],axis=0)
         self.img_second_ring = np.nanmean(img[:18],axis=0)
         self.img_whole = np.nanmean(img[:],axis=0)
+        self.old_img_w = self.img_whole.copy()
 
         tot_int_pix_c = np.nanmean(self.img_central_pix,axis=0)
         tot_int_pix_f = np.nanmean(self.img_first_ring,axis=0)
@@ -214,7 +216,7 @@ class Api:
         fig, ax = plt.subplots(figsize=(9, 6))
      
         # Your plot
-        ax.plot(self.time_points[::1000], self.img_whole[::1000], color='#e15984')
+        ax.plot(self.old_tp[::1000], self.old_img_w[::1000], color='#e15984')
         ax.axvline(x=first_crop*self.pixel_time, color="#9a113c")
         ax.axvline(x=last_crop*self.pixel_time, color='#9a113c')
         ax.set_xlabel("Time (s)",fontsize=14)
@@ -263,6 +265,9 @@ class Api:
         
         # Return the string to JavaScript
         return img_base64
+    
+    def correlate_spot(self):
+        print('Do not forget to delete self.old_tp and self.old_img_w !!!!!!!!')
     
         
 main_window = webview.create_window("FCS app", "FCS_app.html", width=1500, height=1200, resizable=True, js_api=Api())
