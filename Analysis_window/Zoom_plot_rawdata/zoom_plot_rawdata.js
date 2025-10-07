@@ -1,5 +1,6 @@
 const inputFirstTp = document.getElementById("textbox_first_tp");
 const inputLastTp = document.getElementById("textbox_last_tp");
+const divTotTp = document.getElementById("text_total_tp");
 
 
 window.addEventListener('pywebviewready', () => {

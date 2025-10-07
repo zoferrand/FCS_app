@@ -12,6 +12,10 @@ window.addEventListener('pywebviewready', () => {
 
 window.addEventListener('pywebviewready', () => {
     window.zoom_plot_rawdata = async function() {
+        const numb = await window.pywebview.api.get_tp_numb();
+        localStorage.setItem("initTp", `${numb}`);
         await window.pywebview.api.open_zoom_plot_rawdata();
     }
 });
+
+

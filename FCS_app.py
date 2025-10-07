@@ -2,6 +2,7 @@ import webview
 from webview import FileDialog
 import shutil
 import io, base64
+import re
 
 import numpy as np 
 import math as m
@@ -49,7 +50,7 @@ class Api:
     def __init__(self):
         
         self.main_window = None
-        
+          
     def open_file_dialog(self):
         
         window = webview.windows[0]
@@ -186,13 +187,29 @@ class Api:
         os.makedirs("Analysis_window/Zoom_plot_detector", exist_ok=True)
         
         self.opening_plot_detector_window = webview.create_window(" ", "Analysis_window/Zoom_plot_detector/zoom_plot_detector.html", width=1200, height=1200, js_api=self)
+     
+    def get_tp_numb(self):
+        
+        return self.size_T
             
     def open_zoom_plot_rawdata(self):
         
         os.makedirs("Analysis_window/Zoom_plot_rawdata", exist_ok=True)
         
+        with open("Analysis_window/Zoom_plot_rawdata/zoom_plot_rawdata.html","r") as f:
+            html_text = f.read()
+        # \s* takes into account any number of space
+        # \d+ general term to recognise any number
+        # \g<1> tells to keep the first element inside of the big paranthesis and to replace it with what comes after it
+        html_text = re.sub(r'(<div class="text_total_tp" id="text_total_tp"><strong>Total time points:</strong>\s*)\d+',rf"\g<1>{self.size_T}",html_text)
+        html_text = re.sub(r'(max=")\d+(")',rf"\g<1>{self.size_T}\g<2>",html_text)
+        html_text = re.sub(r'(id="textbox_last_tp" value=")\d+(")',rf"\g<1>{self.size_T}\g<2>",html_text)
+        
+        with open("Analysis_window/Zoom_plot_rawdata/zoom_plot_rawdata.html","w") as w:
+            w.write(html_text)
+        
         self.opening_plot_rawdata_window = webview.create_window(" ", "Analysis_window/Zoom_plot_rawdata/zoom_plot_rawdata.html", width=1200, height=1200, js_api=self)
-            
+           
     def save_file(self,path,name):
         
         file_name = name.split('.')[0]
