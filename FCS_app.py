@@ -34,6 +34,8 @@ def plot_detector_array(folder,name,intensities):
     shw = ax.hexbin(x, y, C=intensities, gridsize=(5,3), cmap="plasma")
     bar = plt.colorbar(shw,shrink=0.5,ax=ax)
     bar.set_label('Normalized intensity')
+    bar.ax.yaxis.label.set_size(22)
+    bar.ax.tick_params(labelsize=18)
     ax.set_xticks([])
     ax.set_xticks([], minor=True)
     ax.set_yticks([])
@@ -86,6 +88,7 @@ class Api:
         
         self.time_points = np.array([(i*self.pixel_time) for i in range(self.size_T)])
         self.old_tp = self.time_points.copy()
+        self.old_size_T = self.size_T
 
         root = ET.Element("root")
         ET.SubElement(root,"size_X").text = "%s"%(self.size_X)
@@ -202,6 +205,7 @@ class Api:
         # \d+ general term to recognise any number
         # \g<1> tells to keep the first element inside of the big paranthesis and to replace it with what comes after it
         html_text = re.sub(r'(<div class="text_total_tp" id="text_total_tp"><strong>Total time points:</strong>\s*)\d+',rf"\g<1>{self.size_T}",html_text)
+        html_text = re.sub(r'(<strong>10</strong> seconds -> <strong>\s*)\d+(</strong> time points)',rf"\g<1>{round(10/self.pixel_time)}\g<2>",html_text)
         html_text = re.sub(r'(max=")\d+(")',rf"\g<1>{self.size_T}\g<2>",html_text)
         html_text = re.sub(r'(id="textbox_last_tp" value=")\d+(")',rf"\g<1>{self.size_T}\g<2>",html_text)
         
@@ -265,6 +269,30 @@ class Api:
      
         # Your plot
         ax.plot(self.time_points[::1000], self.img_whole[::1000], color='#e15984')
+        ax.set_xlabel("Time (s)",fontsize=14)
+        ax.set_ylabel("Intensity",fontsize=14)
+        ax.tick_params(axis='both', which='major', labelsize=12)
+        fig.savefig("Opening_file_window/Int_fluctuations.png", dpi=600)
+
+        # Save to buffer instead of file
+        buf = io.BytesIO()
+        fig.savefig(buf, format='png', dpi=600)
+        buf.seek(0)
+
+        # Convert to base64
+        img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+        buf.close()
+        plt.close(fig)
+        
+        # Return the string to JavaScript
+        return img_base64
+    
+    def plot_uncut_data(self):
+        
+        fig, ax = plt.subplots(figsize=(9, 6))
+     
+        # Your plot
+        ax.plot(self.old_tp[::1000], self.old_img_w[::1000], color='#e15984')
         ax.set_xlabel("Time (s)",fontsize=14)
         ax.set_ylabel("Intensity",fontsize=14)
         ax.tick_params(axis='both', which='major', labelsize=12)

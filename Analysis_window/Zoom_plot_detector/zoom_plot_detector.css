@@ -16,54 +16,156 @@ body {
 
 .menu {
     position: absolute;
+    align-items: center;     /* center vertically */
     z-index: 20;
-    top: 1.5vh;   /* distance from top scales with viewport height */
-    left: 2vw;  /* distance from left scales with viewport width */
+    padding-bottom: 10px;
+    top: 10px;   /* distance from top scales with viewport height */
+    left: 25px; /* distance from left scales with viewport width */
+    right: 25px; /* distance from right scales with viewport width */
+    height: 70px;
     display: flex;
-    gap: 2vw;   /* spacing between buttons scales with window width */
+    box-shadow: 0 5px #e16d91;
 }
 
 .save_button {
-    padding: 0.8vh 1.87vw;                /* scales with screen size, 1st one is top/bottom, 2nd one is left/right */
-    font-size: clamp(0.8rem, 2.25vw, 2rem); /* min, preferred, max */
+    display: flex;                  /* flex container */
+    justify-content: center;        /* center horizontally */
+    align-items: center;            /* center vertically */
+    padding: 15px 18px;                /* scales with screen size, 1st one is top/bottom, 2nd one is left/right */
+    font-size: 30px; /* min, preferred, max */
     font-family: 'Outfit', sans-serif;
-    
     background: #2D2431;
-    border-radius: 4vh;                /* rounded corners scale */
+    border-radius: 30px;                /* rounded corners scale */
     color: #F1BCCD;
     cursor: pointer;
-    
-    display: inline-block;
+    height: 30%;
     transition: background 0.3s ease, color 0.3s ease;
     z-index: 3;
-    box-shadow: 0 0.5vw #201922;
+    box-shadow: 0 8px #201922;
 }
 
 .save_button:hover {
     background-color: #E39CB3;  /* lighter hover background */
     color: #FAEADD;                 /* white text on hover */
-    box-shadow: 0 0.5vw #e16d91;
+    box-shadow: 0 8px #e16d91;
 }
 
 .save_button:active {
     background-color: #E39CB3;  /* lighter hover background */
     color: #FAEADD;                 /* white text on hover */
-    box-shadow: 0 0.2vw #e16d91;
-    transform: translateY(0.3vw);
+    box-shadow: 0 4px #e16d91;
+    transform: translateY(6px);
+}
+
+.title_detector {
+    position: absolute;
+    top: 10%; /* or whatever placement you want */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 250;
+    color: #fae0cc
 }
 
 .zoom_plot {
     position: absolute;
     display: flex;
     justify-content: center; /* horizontal center */
-    align-items: center;
-    width: 70%;
-    height: 70%;
+    top: 18%;
+    width: 68%;
+    height: 37%;
 
-    background: white url("../../Opening_file_window/Detector_array.png") no-repeat center center;
-    background-size: contain;   /* keep aspect ratio, fit inside */
+    background: #fff url("../../Opening_file_window/Detector_array.png") no-repeat center center;
+    background-size: contain;   /* fill container, crop excess */
     background-position: center;   /* center vertically */
     z-index: 21;                   
     
-    box-shadow: 0vh 0vw 0.5vh 0.5vw #fff;
+    box-shadow: 0vh 0vw 0.5vh 0.5vw #ffffff;
 }
+
+.info_detector_select {
+    position: absolute;
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    bottom: 36.5%;
+    padding: 1.5vh 1.5vh 2vh 2vh;
+    width: 65%;
+    height: 2.5vh;
+    font-size: 1.2rem;
+    font-family: 'Outfit', sans-serif;
+    color: #d4b4e1;
+    box-shadow: 0vh 0vw 0.5vh 0.5vw #3d2b45;
+    background: #3d2b45;
+}
+
+.diff_detectors {
+    position: absolute;
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    bottom: 9.5%;
+    padding: 1.5vh 1.5vh 2vh 2vh;
+    width: 66%;
+    height: 23vh;
+    font-size: 1.2rem;
+    font-family: 'Outfit', sans-serif;
+    color: #d4b4e1;
+    box-shadow: 0vh 0vw 0.5vh 0.5vw #d4b4e1;
+    background: #d4b4e1;
+    gap: 2vw;
+    padding: 1vw;
+}
+
+.central_detector_block , .first_ring_block, .second_ring_block, .entire_detector_block{
+    display: block;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    gap: 0.01vw; 
+    background: #fff;
+    height: 95%;
+    width: 15vw;
+}
+
+.div_confirm_button {
+    position: absolute;
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    bottom: 2.5%;
+    width: 5%;
+    height: 5%;
+}
+
+.confirm_button {
+    display: flex;                  /* flex container */
+    justify-content: center;        /* center horizontally */
+    align-items: center;
+    padding: 0.8vh 1.87vw;                /* scales with screen size, 1st one is top/bottom, 2nd one is left/right */
+    font-size: 1.7rem; /* min, preferred, max */
+    font-family: 'Outfit', sans-serif;
+    background: #F1BCCD;
+    border-radius: 10vh;                /* rounded corners scale */
+    color: #e15984;
+    cursor: pointer;
+    height: 70%;
+    width: 100%;
+    transition: background 0.3s ease, color 0.3s ease;
+    z-index: 3;
+    box-shadow: 0 0.7vw #f092b0;
+}
+
+.confirm_button:hover {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.7vw #e16d91;
+}
+
+.confirm_button:active {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.3vw #e16d91;
+    transform: translateY(0.3vw);
+}
+

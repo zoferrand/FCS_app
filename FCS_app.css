@@ -91,7 +91,7 @@ body {
     right: 6vw;  /* distance from left scales with viewport width */
     display: flex;
     gap: 2vw;   /* spacing between buttons scales with window width */
-    color:#F1BCCD;
+    color:#f092b0;
     font-size: clamp(0.6rem, 1.35vw, 1.5rem); /* min, preferred, max */
     font-family: 'Outfit', sans-serif;
     text-decoration: underline;

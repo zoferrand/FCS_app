@@ -229,12 +229,45 @@ body {
     justify-content: center; /* center horizontally */
     align-items: center;     /* center vertically */
     bottom: 2%;
-    width: 16vw;
+    width: 25vw;
     height: 7vh;
+    gap: 4vw;
     
 }
 
 .crop_button {
+    display: flex;                  /* flex container */
+    justify-content: center;        /* center horizontally */
+    align-items: center;
+    padding: 0.8vh 1.87vw;                /* scales with screen size, 1st one is top/bottom, 2nd one is left/right */
+    font-size: 1.7rem; /* min, preferred, max */
+    font-family: 'Outfit', sans-serif;
+    
+    background: #F1BCCD;
+    border-radius: 4vh;                /* rounded corners scale */
+    color: #e15984;
+    cursor: pointer;
+    height: 50%;
+    width: 50%;
+    transition: background 0.3s ease, color 0.3s ease;
+    z-index: 3;
+    box-shadow: 0 0.8vw #f092b0;
+}
+
+.crop_button:hover {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.8vw #e16d91;
+}
+
+.crop_button:active {
+    background-color: #E39CB3;  /* lighter hover background */
+    color: #FAEADD;                 /* white text on hover */
+    box-shadow: 0 0.3vw #e16d91;
+    transform: translateY(0.4vw);
+}
+
+.reset_button {
     display: flex;                  /* flex container */
     justify-content: center;        /* center horizontally */
     align-items: center;
@@ -253,13 +286,13 @@ body {
     box-shadow: 0 0.8vw #201922;
 }
 
-.crop_button:hover {
+.reset_button:hover {
     background-color: #E39CB3;  /* lighter hover background */
     color: #FAEADD;                 /* white text on hover */
     box-shadow: 0 0.8vw #e16d91;
 }
 
-.crop_button:active {
+.reset_button:active {
     background-color: #E39CB3;  /* lighter hover background */
     color: #FAEADD;                 /* white text on hover */
     box-shadow: 0 0.3vw #e16d91;

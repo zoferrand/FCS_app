@@ -16,7 +16,7 @@
     <div class="zoom_plot"></div>
 
     <div class="info_crop">
-        <div class="text_total_tp" id="text_total_tp"><strong>Total time points:</strong> 5000000</div>
+        <div class="text_total_tp" id="text_total_tp"><strong>Total time points:</strong> 30000000, <strong>10</strong> seconds -> <strong>8143322</strong> time points</div>
         <div>It is recommanded to <strong>crop</strong> the beginning of the signal in order to reduce the effect of photo-bleaching on the correlation curve.</div>
     </div>
 
@@ -26,7 +26,7 @@
         <div class="group_first">
             <div class="text_boxes_first">
                 <label for="textbox_first_tp" class="label_first"><strong>Starting point:</strong></label>
-                <input type="number" class="first_tp" id="textbox_first_tp" value="0" min="0" max="5000000" step="1000">
+                <input type="number" class="first_tp" id="textbox_first_tp" value="0" min="0" max="30000000" step="1000000">
             </div>
             <div class="div_confirm_button_first">
                 <label for="div_confirm_button_first" class="label_button_first"> . </label>
@@ -36,7 +36,7 @@
         <div class="group_last">
             <div class="text_boxes_last">
                 <label for="textbox_last_tp" class="label_last"><strong>Ending point:</strong></label>
-                <input type="number" class="last_tp" id="textbox_last_tp" value="5000000" min="0" max="5000000" step="1000">
+                <input type="number" class="last_tp" id="textbox_last_tp" value="30000000" min="0" max="30000000" step="1000000">
             </div>
             <div class="div_confirm_button_last">
                 <label for="div_confirm_button_last" class="label_button_last"> . </label>
@@ -46,6 +46,7 @@
     </div>
 
     <div class="div_crop">
+        <span class="reset_button" id="reset_button" onclick="plotUncutData()"><b>Reset</b></span>
         <span class="crop_button" id="crop_button" onclick="plotCroppedData()"><b>Crop !</b></span>
     </div>
 

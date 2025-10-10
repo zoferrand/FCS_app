@@ -106,7 +106,7 @@ body {
     left: 6vw;  /* distance from left scales with viewport width */
     display: flex;
     gap: 2vw;   /* spacing between buttons scales with window width */
-    color:#F1BCCD;
+    color:#f092b0;
     font-size: clamp(0.6rem, 1.35vw, 1.5rem); /* min, preferred, max */
     font-family: 'Outfit', sans-serif;
     text-decoration: underline;
@@ -210,12 +210,12 @@ label {
     font-size: clamp(0.8rem, 1.8vw, 2rem); /* min, preferred, max */
     font-family: 'Outfit', sans-serif;
     
-    background: #2D2431;
+    background: #F1BCCD;
     border-radius: 4vh;                /* rounded corners scale */
-    color: #F1BCCD;
+    color: #e15984;
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease;
-    box-shadow: 0 0.8vw #201922;
+    box-shadow: 0 0.8vw #f092b0;
 }
 
 .correlate_button:hover {

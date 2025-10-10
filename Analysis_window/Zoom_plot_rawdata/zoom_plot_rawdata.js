@@ -54,4 +54,19 @@ window.addEventListener('pywebviewready', () => {
     }
 });
 
+window.addEventListener('pywebviewready', () => {
+    window.plotUncutData = async function() {
+        const valueFirstTp = inputFirstTp.value;
+        const valueLastTp = inputLastTp.value;
+        const base64Image = await window.pywebview.api.plot_uncut_data();
+        
+        // Build the data URL
+        const imageUrl = `data:image/png;base64,${base64Image}`;
+
+        // Replace CSS background dynamically
+        const zoomPlotDiv = document.querySelector('.zoom_plot');
+        zoomPlotDiv.style.backgroundImage = `url('${imageUrl}')`;
+    }
+});
+
 
